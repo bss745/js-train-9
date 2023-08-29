@@ -402,22 +402,17 @@ function findLongestWord(arr) {
     return ` `;
   }
   // Використовуємо метод reduce() для знаходження найдовшого слова
-  const bbb = arr.reduce((total, amount) => {
-    total = amount.length;
-  });
-  return bbb;
 
-  //   let longestWord = 0;
-  //   const findLongest = arr.reduce((num, word, index, array) => {
-  //     if (word > word.length) {
-  //       return (num = word);
-  //     }
-  //     num = word.length;
-  //   }, 0);
+  const findLongest = arr.reduce((num, word) => {
+    if (word.length > num.length) {
+      return word;
+    }
+    return num;
+  }, "");
   //   // Порівнюємо довжину поточного слова з довжиною найдовшого слова
   //   // Інакше повертаємо попереднє найдовше слово без змін
   //   // Повертаємо найдовше слово
-  //   return findLongest;
+  return findLongest;
 }
 // const totalBalance = userAllList.reduce((num, user) => num + user.balance, 0);
 console.log("Завдання: 15 ==============================");
@@ -438,7 +433,9 @@ function findDuplicateElements(arr) {
     return [];
   }
   // Використовуємо метод filter() для вибірки лише дубльованих елементів
-  const double = arr.filter((elem1, elem2) => elem1 === elem2);
+  const double = arr.filter((num, index) => {
+    return arr.indexOf(num) !== index;
+  });
   return double;
 
   // Перевіряємо, чи є індекс поточного елемента відмінним від індексу першого входження елемента, та повертаємо результат
@@ -458,10 +455,18 @@ console.log(findDuplicateElements([1, 2, 3, 4, 2, 5, 6, 3, 5])); // Виведе
 */
 function capitalizeWords(arr) {
   // Перевіряємо, чи вхідний параметр є масивом, якщо ні, повертаємо пустий масив
+  if (!Array.isArray(arr)) {
+    return [];
+  }
   // Використовуємо метод map() для перетворення кожного слова в рядку з першою великою літерою
+  const capitalizedArray = arr.map((word) => {
+    const capitalizedWord = word.charAt(0).toUpperCase() + word.slice(1);
+    return capitalizedWord;
+  });
   // Перетворюємо першу літеру слова у верхній регістр да додамо до неї всі символи слова крім першого
   //Повертаємо слово
   // Повертаємо новий масив зі словами, у яких перша літера у верхньому регістрі
+  return capitalizedArray;
 }
 console.log("Завдання: 17 ==============================");
 console.log(capitalizeWords(["apple", "banana", "orange"])); // Виведе ['Apple', 'Banana', 'Orange']
